@@ -127,6 +127,7 @@
             background: transparent;
             border: none;
             opacity: 0.8;
+            display: none;
         }
 
         #settings:hover {
@@ -482,16 +483,19 @@
             var stateInterval = null;
 
             //ejemplo
-            var ejem = new URL('https://localhost:8080/1');
-            console.log(ejem);
-            var x = ejem.pathname.split('/');
-            var minutes = x[1];
-            console.log(minutes);
+            var ejem = window.location.href;
+            //new URL('file:///android_asset/index.html?2');
+            //console.log(ejem);
+            var search = window.location.search;
+            //console.log(search);
+            var y = search.split('?');
+            var minutes = y[1];
+            //console.log(minutes);
 
             var breathContent = document.getElementsByClassName("breath-content")[0];
             var start = document.getElementById("start");
             var settings = document.getElementById("settings");
-            var settingsIcon = document.getElementById("settingsIcon");
+            //var settingsIcon = document.getElementById("settingsIcon");
             var increase = document.getElementById("increase");
             var decrease = document.getElementById("decrease");
             //var minutes = document.getElementById("minutes");
@@ -548,12 +552,12 @@
                     breathContent.style.animationPlayState = "running";
                 });
 
-                settings.addEventListener("click", function() {
+                /*settings.addEventListener("click", function() {
                     mainContent.classList.toggle("isOpen");
                     sidebar.classList.toggle("isOpen");
                     settingsIcon.classList.toggle("fa-cog");
                     settingsIcon.classList.toggle("icon-cancel");
-                });
+                });*/
             }
 
             function startTimer(duration) {
