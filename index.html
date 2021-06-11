@@ -25,7 +25,7 @@
                 <button id="start">Empezar</button>
                 <div id="countdown" class="number"></div>
             </div>
-            <div id="sidebar" class="col-lg-2">
+            <div id="sidebar" class="col-lg-2 hide">
                 <div class="option">
                     <h2>Opciones</h2>
 
@@ -62,6 +62,10 @@
         html {
             display: flex;
             flex-direction: column;
+        }
+
+        .hide {
+            display: none !important;
         }
 
         body {
@@ -194,6 +198,7 @@
             opacity: 0;
             -webkit-transition: opacity 0.5s, width 0.1s;
             transition: opacity 0.5s, width 0.1s;
+
         }
 
         .sidebar.isOpen {
@@ -476,13 +481,20 @@
             var breathTime = 5;
             var stateInterval = null;
 
+            //ejemplo
+            var ejem = new URL('https://localhost:8080/1');
+            console.log(ejem);
+            var x = ejem.pathname.split('/');
+            var minutes = x[1];
+            console.log(minutes);
+
             var breathContent = document.getElementsByClassName("breath-content")[0];
             var start = document.getElementById("start");
             var settings = document.getElementById("settings");
             var settingsIcon = document.getElementById("settingsIcon");
             var increase = document.getElementById("increase");
             var decrease = document.getElementById("decrease");
-            var minutes = document.getElementById("minutes");
+            //var minutes = document.getElementById("minutes");
             var countdown = document.getElementById("countdown");
             var breathMsg = document.getElementById("breathMsg");
             var message = "Inicia el ejercicio cuando estés listo";
@@ -501,6 +513,7 @@
 
                 breathMsg.textContent = message;
 
+                /*
                 decrease.addEventListener("click", function() {
                     if (breathTime > 1) {
                         breathTime--;
@@ -512,7 +525,7 @@
                     breathTime++;
                     minutes.textContent = breathTime.toString();
                 });
-
+                */
                 start.addEventListener("click", function() {
                     var msgInterval = (document.getElementById("slow").checked) ? 7500 : 5000;
                     var breathSpeed = (document.getElementById("slow").checked) ? "15s" : "10s";
@@ -527,7 +540,8 @@
                     updateClass(start, "fade-in", "fade-out");
                     updateClass(countdown, "fade-out", "fade-in");
 
-                    startTimer(breathTime * 60);
+                    //startTimer(breathTime * 60);
+                    startTimer(minutes * 60);
                     document.body.style.WebkitAnimationPlayState = "running";
                     document.body.style.animationPlayState = "running";
                     breathContent.style.WebkitAnimationPlayState = "running";
